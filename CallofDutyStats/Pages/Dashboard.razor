@@ -1,0 +1,32 @@
+﻿
+@page "/dashboard/{GamerId}"
+@inject CODService codService;
+
+<h3>Dashboard</h3>
+
+<p>@GamerId</p>
+
+
+<div class="card">
+    <div class="card-body">
+        <p>@result</p>
+    </div>
+</div>
+@code {
+
+
+    [Parameter]
+    public string GamerId { get; set; }
+
+    private string result { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        LoginModel loginModel = new LoginModel();
+        loginModel.UserID = GamerId;
+
+        result =  await codService.GetAsync(loginModel);
+
+        this.StateHasChanged();
+    }
+}

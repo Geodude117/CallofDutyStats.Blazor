@@ -1,0 +1,42 @@
+﻿@inject NavigationManager UriHelper
+
+<div class="text-center"
+     style="
+        align-items: center;
+        padding-top: 40px;
+        padding-bottom: 40px;">
+    <EditForm class="form-signin" Model="@exampleModel" OnValidSubmit="HandleValidSubmit">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <img class="mb-4" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+        <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+        <div class="p-1">
+            <InputText @bind-Value="exampleModel.Email" type="email" class="form-control" placeholder="Email address" />
+        </div>
+
+        <div class="p-1">
+            <InputText @bind-Value="exampleModel.Password" type="password" class="form-control p-2" placeholder="Password" />
+        </div>
+
+        <div class="p-1">
+            <InputText @bind-Value="exampleModel.UserID" class="form-control p-2" placeholder="Gamer ID" requautofocusired />
+        </div>
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+
+    </EditForm>
+
+</div>
+
+@code {
+
+    public LoginModel exampleModel = new LoginModel();
+
+    private void HandleValidSubmit()
+    {
+        UriHelper.NavigateTo("/dashboard/" + exampleModel.UserID);
+
+    }
+
+}
